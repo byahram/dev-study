@@ -11,7 +11,7 @@ taskController.createTask = async (req, res) => {
 
     res.status(200).json({ status: "success", data: newTask }); // front로 response 데이터 보내기
   } catch (error) {
-    res.status(400).json({ status: "fail", error: error });
+    res.status(400).json({ status: "fail", message: error.message });
   }
 };
 
@@ -22,7 +22,7 @@ taskController.getTasks = async (req, res) => {
 
     res.status(200).json({ status: "success", data: taskList });
   } catch (error) {
-    res.status(400).json({ status: "fail", error: error });
+    res.status(400).json({ status: "fail", message: error.message });
   }
 };
 
@@ -44,7 +44,7 @@ taskController.updateTask = async (req, res) => {
 
     res.status(200).json({ status: "success", data: updateTask });
   } catch (error) {
-    res.status(400).json({ status: "fail", error: error });
+    res.status(400).json({ status: "fail", message: error.message });
   }
 };
 
@@ -58,7 +58,7 @@ taskController.deleteTask = async (req, res) => {
 
     res.status(200).json({ status: "success", data: deleteTask });
   } catch (error) {
-    res.status(400).json({ status: "fail", error: error });
+    res.status(400).json({ status: "fail", message: error.message });
   }
 };
 
