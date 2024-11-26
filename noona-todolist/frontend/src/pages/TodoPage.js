@@ -4,8 +4,9 @@ import api from "../utils/api";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import { Navigate } from "react-router-dom";
 
-const TodoPage = () => {
+const TodoPage = ({ user, setUser }) => {
   const [todoList, setTodoList] = useState([]);
   const [todoValue, setTodoValue] = useState("");
 
@@ -61,12 +62,22 @@ const TodoPage = () => {
     }
   };
 
+  // handleLogout
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    setUser(null);
+    Navigate("/login");
+  };
+
   useEffect(() => {
     getTasks();
   }, []);
 
   return (
     <Container>
+      <div onClick={handleLogout} className="logoutBtn">
+        로그아웃
+      </div>
       <Row className="add-item-row">
         <Col xs={12} sm={10}>
           <input
