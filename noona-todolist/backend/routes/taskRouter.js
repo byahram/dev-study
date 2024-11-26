@@ -1,9 +1,10 @@
 const express = require("express");
-const taskController = require("../controller/taskController");
 const router = express.Router();
+const taskController = require("../controller/taskController");
+const authController = require("../controller/authController");
 
 router.get("/", taskController.getTasks);
-router.post("/", taskController.createTask);
+router.post("/", authController.authenticate, taskController.createTask);
 router.put("/:id", taskController.updateTask);
 router.delete("/:id", taskController.deleteTask);
 

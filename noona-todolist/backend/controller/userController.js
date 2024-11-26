@@ -17,9 +17,6 @@ userController.createUser = async (req, res) => {
 
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(password, salt);
-
-    console.log(hash);
-
     const newUser = new User({ email, name, password: hash });
     await newUser.save();
 
@@ -45,6 +42,21 @@ userController.loginWithEmail = async (req, res) => {
     }
 
     throw new Error("아이디 또는 비밀번호가 일치하지 않습니다.");
+  } catch (error) {
+    res.status(400).json({ status: "fail", message: error.message });
+  }
+};
+
+// getUser
+userController.getUser = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("can not find user");
+    }
+
+    res.status(200).json({ status: "success", user });
   } catch (error) {
     res.status(400).json({ status: "fail", message: error.message });
   }
