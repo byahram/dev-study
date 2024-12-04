@@ -6,7 +6,15 @@ import { initialCart } from "../cart/cartSlice";
 
 export const loginWithEmail = createAsyncThunk(
   "user/loginWithEmail",
-  async ({ email, password }, { rejectWithValue }) => {}
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/auth/login", { email, password });
+      return response.data;
+    } catch (error) {
+      // 실패시 생긴 에러값을 reducer에 저장
+      return rejectWithValue(error.message);
+    }
+  }
 );
 
 export const loginWithGoogle = createAsyncThunk(
@@ -74,6 +82,7 @@ const userSlice = createSlice({
   // async처럼 외부의 함수를 통해 호출될 떄
   extraReducers: (builder) => {
     builder
+      // registerUser
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
       })
@@ -84,6 +93,19 @@ const userSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
         state.registrationError = action.payload;
+      })
+      // loginWithEmail
+      .addCase(loginWithEmail.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(loginWithEmail.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload.user;
+        state.loginError = null;
+      })
+      .addCase(loginWithEmail.rejected, (state, action) => {
+        state.loading = false;
+        state.loginError = action.payload;
       });
   },
 });
