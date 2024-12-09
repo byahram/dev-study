@@ -59,6 +59,7 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const handleClose = () => {
     //모든걸 초기화시키고;
     // 다이얼로그 닫아주기
+    setShowDialog(false);
   };
 
   const handleSubmit = (event) => {
@@ -67,16 +68,19 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     if (stock.length === 0) return setStockError(true);
 
     // 재고를 배열에서 객체로 바꿔주기
+    // [['M',2]] 에서 {M:2}로
     const totalStock = stock.reduce((total, item) => {
       return { ...total, [item[0]]: parseInt(item[1]) };
     }, {});
 
-    // [['M',2]] 에서 {M:2}로
     if (mode === "new") {
       //새 상품 만들기
       dispatch(createProduct({ ...formData, stock: totalStock }));
     } else {
       // 상품 수정하기
+      dispatch(
+        editProduct({ ...formData, stock: totalStock, id: selectedProduct._id })
+      );
     }
   };
 
