@@ -7,22 +7,22 @@ import { getProductList } from "../../features/product/productSlice";
 
 const LandingPage = () => {
   const dispatch = useDispatch();
-
   const productList = useSelector((state) => state.product.productList);
   const [query] = useSearchParams();
   const name = query.get("name");
+
   useEffect(() => {
     dispatch(
       getProductList({
         name,
       })
     );
-  }, [query]);
+  }, [query, dispatch]);
 
   return (
     <Container>
       <Row>
-        {productList.length > 0 ? (
+        {productList && productList.length > 0 ? (
           productList.map((item) => (
             <Col md={3} sm={12} key={item._id}>
               <ProductCard item={item} />

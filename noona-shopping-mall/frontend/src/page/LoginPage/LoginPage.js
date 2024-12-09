@@ -12,18 +12,28 @@ const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, loginError } = useSelector((state) => state.user);
+  const { user, loginError, loading } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isDisable, setIsDisable] = useState(false); // button disable
 
   useEffect(() => {
     if (loginError) {
+      setIsDisable(false);
       dispatch(clearErrors());
     }
-  }, [navigate]);
-  const handleLoginWithEmail = (event) => {
+  }, [dispatch]);
+
+  const handleLoginWithEmail = async (event) => {
     event.preventDefault();
-    dispatch(loginWithEmail({ email, password }));
+    setIsDisable(true);
+    try {
+      await dispatch(loginWithEmail({ email, password }));
+    } catch (err) {
+      console.log();
+    } finally {
+      setIsDisable(false);
+    }
   };
 
   const handleGoogleLogin = async (googleData) => {
@@ -32,7 +42,9 @@ const Login = () => {
 
   if (user) {
     navigate("/");
+    return null;
   }
+
   return (
     <>
       <Container className="login-area">
@@ -61,9 +73,10 @@ const Login = () => {
               onChange={(event) => setPassword(event.target.value)}
             />
           </Form.Group>
+
           <div className="display-space-between login-button-area">
-            <Button variant="danger" type="submit">
-              Login
+            <Button variant="danger" type="submit" disabled={loading}>
+              {loading ? "Loading..." : "로그인"}
             </Button>
             <div>
               아직 계정이 없으세요?<Link to="/register">회원가입 하기</Link>{" "}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -19,7 +19,8 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState("");
   const [policyError, setPolicyError] = useState(false);
-  const { registrationError } = useSelector((state) => state.user);
+  const { registrationError, loading } = useSelector((state) => state.user);
+  const [isDisable, setIsDisable] = useState(false); // button disable
 
   const register = (event) => {
     event.preventDefault();
@@ -35,8 +36,15 @@ const RegisterPage = () => {
     }
     setPasswordError("");
     setPolicyError(false);
+    setIsDisable(true);
     dispatch(registerUser({ name, email, password, navigate }));
   };
+
+  useEffect(() => {
+    if (registrationError) {
+      setIsDisable(false);
+    }
+  }, [registrationError]);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -114,8 +122,9 @@ const RegisterPage = () => {
             checked={formData.policy}
           />
         </Form.Group>
-        <Button variant="danger" type="submit">
-          회원가입
+
+        <Button variant="danger" type="submit" disabled={loading}>
+          {loading ? "Loading..." : "회원가입"}
         </Button>
       </Form>
     </Container>
