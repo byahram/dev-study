@@ -6,15 +6,28 @@ import { initialCart } from "../cart/cartSlice";
 
 export const loginWithEmail = createAsyncThunk(
   "user/loginWithEmail",
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ email, password }, { dispatch, rejectWithValue }) => {
     try {
       const response = await api.post("/auth/login", { email, password });
-      // 토큰 저장
-      sessionStorage.setItem("token", response.data.token);
+      if (response.status === 200) {
+        // 1. local storage: browser가 꺼지거나 새로 창을 열어도 유지
+        // 2. session storage: browser가 꺼지면 유지 놉, 새로고침은 유지
+        sessionStorage.setItem("token", response.data.token);
+      }
+      // 성공 - LoginPage
       return response.data;
-    } catch (error) {
-      // 실패시 생긴 에러값을 reducer에 저장
-      return rejectWithValue(error.message);
+    } catch (err) {
+      // 실패
+      // 1. 실패 토스트 메세지를 보여준다
+      dispatch(
+        showToastMessage({
+          message: "로그인을 실패했습니다.",
+          status: "error",
+        })
+      );
+
+      // 2. 에러값을 reducer에 저장
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -24,7 +37,11 @@ export const loginWithGoogle = createAsyncThunk(
   async (token, { rejectWithValue }) => {}
 );
 
-export const logout = () => (dispatch) => {};
+export const logout = () => (dispatch) => {
+  sessionStorage.removeItem("token");
+  dispatch(userSlice.actions.logout());
+};
+
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (
@@ -45,17 +62,16 @@ export const registerUser = createAsyncThunk(
       navigate("/login");
 
       return response.data.data;
-    } catch (error) {
+    } catch (err) {
       // 1. 실패 토스트 메시지 보여주기
-
       dispatch(
         showToastMessage({
-          message: "회원가입에 실패했습니다.",
+          message: "회원가입을 실패했습니다.",
           status: "error",
         })
       );
       // 2. 에러값을 저장한다
-      return rejectWithValue(error.message);
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -86,6 +102,10 @@ const userSlice = createSlice({
     clearErrors: (state) => {
       state.loginError = null;
       state.registrationError = null;
+    },
+    logout: (state) => {
+      state.user = null;
+      state.loginError = null;
     },
   },
   // async처럼 외부의 함수를 통해 호출될 떄
@@ -118,7 +138,7 @@ const userSlice = createSlice({
       })
       // loginWithToken
       .addCase(loginWithToken.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.data;
       });
   },
 });
