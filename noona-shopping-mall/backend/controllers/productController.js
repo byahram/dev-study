@@ -29,9 +29,9 @@ productController.createProduct = async (req, res) => {
       status,
     });
     await product.save();
-    res.status(200).json({ status: "success", product });
+    return res.status(200).json({ status: "success", product });
   } catch (err) {
-    res.status(400).json({ status: "fail", message: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
@@ -61,9 +61,9 @@ productController.getProducts = async (req, res) => {
     const productList = await query.exec();
     response.data = productList;
 
-    res.status(200).json(response);
+    return res.status(200).json(response);
   } catch (err) {
-    res.status(400).json({ status: "fail", message: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
@@ -99,9 +99,9 @@ productController.updateProduct = async (req, res) => {
     );
     if (!product) throw new Error("item doesn't exist");
 
-    res.status(200).json({ status: "success", data: product });
+    return res.status(200).json({ status: "success", data: product });
   } catch (err) {
-    res.status(400).json({ status: "fail", error: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
@@ -114,9 +114,21 @@ productController.deleteProduct = async (req, res) => {
       { isDeleted: true }
     );
     if (!product) throw new Error("No item found");
-    res.status(200).json({ status: "success" });
-  } catch (error) {
-    return res.status(400).json({ status: "fail", error: error.message });
+    return res.status(200).json({ status: "success" });
+  } catch (err) {
+    return res.status(400).json({ status: "fail", message: err.message });
+  }
+};
+
+//
+productController.getProductDetail = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    if (!product) throw new Error("No item found");
+    return res.status(200).json({ status: "success", data: product });
+  } catch (err) {
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
