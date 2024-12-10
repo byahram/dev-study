@@ -25,7 +25,7 @@ userController.createUser = async (req, res) => {
     await newUser.save();
     return res.status(200).json({ status: "success" });
   } catch (err) {
-    res.status(400).json({ status: "fail", message: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
@@ -41,7 +41,7 @@ userController.getUser = async (req, res) => {
     }
     return res.status(200).json({ status: "success", data: user });
   } catch (err) {
-    res.status(400).json({ status: "fail", message: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 

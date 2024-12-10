@@ -22,7 +22,7 @@ authController.loginWithEmail = async (req, res) => {
     }
     throw new Error("invalid email or password");
   } catch (err) {
-    res.status(400).json({ status: "fail", message: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
@@ -39,7 +39,7 @@ authController.authenticate = async (req, res, next) => {
     });
     next();
   } catch (err) {
-    res.status(400).json({ status: "fail", message: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
@@ -51,7 +51,7 @@ authController.checkAdminPermission = async (req, res, next) => {
     if (user.level !== "admin") throw new Error("No Permission");
     next();
   } catch (err) {
-    res.status(400).json({ status: "fail", message: err.message });
+    return res.status(400).json({ status: "fail", message: err.message });
   }
 };
 
