@@ -4,6 +4,8 @@ const cartController = require("../controllers/cartController");
 const authController = require("../controllers/authController");
 
 router.post("/", authController.authenticate, cartController.addItemToCart);
+router.get("/", authController.authenticate, cartController.getCart);
+router.get("/qty", authController.authenticate, cartController.getCartQty);
 // router.delete(
 //   "/:id",
 //   authController.authenticate,
