@@ -1,11 +1,12 @@
 import React from "react";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { Row, Col, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { currencyFormat } from "../../../utils/number";
 import { updateQty, deleteCartItem } from "../../../features/cart/cartSlice";
-const CartProductCard = ({ item }) => {
+
+const CartProductCard = ({ item, loading }) => {
   const dispatch = useDispatch();
 
   const handleQtyChange = (id, value) => {
@@ -25,12 +26,16 @@ const CartProductCard = ({ item }) => {
         <Col md={10} xs={12}>
           <div className="display-flex space-between">
             <h3>{item.productId.name}</h3>
-            <button className="trash-button">
-              <FontAwesomeIcon
-                icon={faTrash}
-                width={24}
-                onClick={() => deleteCart(item._id)}
-              />
+            <button className="trash-button" disabled={loading}>
+              {loading ? (
+                <FontAwesomeIcon icon={faSpinner} width={24} />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  width={24}
+                  onClick={() => deleteCart(item._id)}
+                />
+              )}
             </button>
           </div>
 
