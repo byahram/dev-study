@@ -64,7 +64,7 @@ export const deleteCartItem = createAsyncThunk(
       dispatch(getCartList());
       return response.data.cartItemQty;
     } catch (err) {
-      return rejectWithValue(err.error);
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -78,7 +78,7 @@ export const updateQty = createAsyncThunk(
 
       return response.data.data;
     } catch (err) {
-      return rejectWithValue(err.error);
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -92,7 +92,7 @@ export const getCartQty = createAsyncThunk(
 
       return response.data.qty;
     } catch (err) {
-      return rejectWithValue(err.error);
+      return rejectWithValue(err.message);
     }
   }
 );
