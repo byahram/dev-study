@@ -37,13 +37,16 @@ const Login = () => {
   };
 
   const handleGoogleLogin = async (googleData) => {
+    console.log("gogledata", googleData);
     //구글 로그인 하기
+    dispatch(loginWithGoogle(googleData.credential));
   };
 
-  if (user) {
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <>
