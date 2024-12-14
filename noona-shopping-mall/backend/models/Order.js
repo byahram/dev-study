@@ -22,12 +22,20 @@ const orderSchema = Schema(
   },
   { timestamps: true }
 );
+
 orderSchema.methods.toJSON = function () {
   const obj = this._doc;
   delete obj.__v;
   delete obj.updatedAt;
   return obj;
 };
+
+orderSchema.post("save", async function () {
+  // 카트 비워주기
+  const cart = await Cart.findOne({ userId: this.userId });
+  cart.items = [];
+  await cart.save();
+});
 
 const Order = mongoose.model("Order", orderSchema);
 module.exports = Order;
