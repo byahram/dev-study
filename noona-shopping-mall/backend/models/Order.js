@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("./User");
 const Product = require("./Product");
+const Cart = require("./Cart");
 const Schema = mongoose.Schema;
 
 const orderSchema = Schema(
@@ -14,9 +15,9 @@ const orderSchema = Schema(
     items: [
       {
         productId: { type: mongoose.ObjectId, ref: Product, required: true },
-        price: { type: Number, required: true },
         qty: { type: Number, required: true, default: 1 },
         size: { type: String, required: true },
+        price: { type: Number, required: true },
       },
     ],
   },
