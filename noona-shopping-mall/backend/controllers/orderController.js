@@ -105,4 +105,23 @@ orderController.getOrderList = async (req, res) => {
   }
 };
 
+// updateOrder
+orderController.updateOrder = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const order = await Order.findByIdAndUpdate(
+      id,
+      { status: status },
+      { new: true }
+    );
+    if (!order) throw new Error("Can't find order");
+
+    return res.status(200).json({ status: "success", data: order });
+  } catch (err) {
+    return res.status(400).json({ status: "fail", message: err.message });
+  }
+};
+
 module.exports = orderController;
