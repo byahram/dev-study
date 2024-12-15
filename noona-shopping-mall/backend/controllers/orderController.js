@@ -3,6 +3,7 @@ const { randomStringGenerator } = require("../utils/randomStringGenerator");
 const productController = require("./productController");
 
 const orderController = {};
+const PAGE_SIZE = 5;
 
 orderController.createOrder = async (req, res) => {
   try {
@@ -39,6 +40,30 @@ orderController.createOrder = async (req, res) => {
     return res
       .status(200)
       .json({ status: "success", orderNum: newOrder.orderNum });
+  } catch (err) {
+    return res.status(400).json({ status: "fail", message: err.message });
+  }
+};
+
+// getOrder
+orderController.getOrder = async (req, res, next) => {
+  try {
+    const { userId } = req;
+
+    const orderList = await Order.find({ userId: userId }).populate({
+      path: "items",
+      populate: {
+        path: "productId",
+        model: "Product",
+        select: "image name",
+      },
+    });
+    const totalItemNum = await Order.find({ userId: userId }).countDocuments();
+    const totalPageNum = Math.ceil(totalItemNum / PAGE_SIZE);
+
+    return res
+      .status(200)
+      .json({ status: "success", data: orderList, totalPageNum });
   } catch (err) {
     return res.status(400).json({ status: "fail", message: err.message });
   }
