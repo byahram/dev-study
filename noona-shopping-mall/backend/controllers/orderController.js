@@ -69,4 +69,40 @@ orderController.getOrder = async (req, res, next) => {
   }
 };
 
+// getOrderList
+orderController.getOrderList = async (req, res) => {
+  try {
+    let { page, orderNum } = req.query;
+
+    let cond = {};
+    if (orderNum) {
+      cond = {
+        orderNum: { $regex: orderNum, $options: "i" },
+      };
+    }
+
+    const orderList = await Order.find(cond)
+      .populate("userId")
+      .populate({
+        path: "items",
+        populate: {
+          path: "productId",
+          model: "Product",
+          select: "image name",
+        },
+      })
+      .skip((page - 1) * PAGE_SIZE)
+      .limit(PAGE_SIZE);
+
+    const totalItemNum = await Order.find(cond).countDocuments();
+    const totalPageNum = Math.ceil(totalItemNum / PAGE_SIZE);
+
+    return res
+      .status(200)
+      .json({ status: "success", data: orderList, totalPageNum });
+  } catch (err) {
+    return res.status(400).json({ status: "fail", message: err.message });
+  }
+};
+
 module.exports = orderController;
