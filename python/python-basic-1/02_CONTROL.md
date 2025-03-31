@@ -621,4 +621,35 @@ print()
 9 X 9 = 81
 ```
 
+```python
+# 복습 1
+numbers = [10, 20, 30, 40, 50]
+
+for i in range(len(numbers)) :
+    print(numbers[i])
+print()
+
+# Output
+10
+20
+30
+40
+50
+```
+
+```python
+# 복습 2
+fruits = ["apple", "banana", "cherry", "data"]
+
+for i in range(len(fruits)) :
+    print(fruits[i])
+print()
+
+# Output
+apple
+banana
+cherry
+data
+```
+
 <br>
