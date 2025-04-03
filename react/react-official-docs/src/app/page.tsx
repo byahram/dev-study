@@ -1,33 +1,5 @@
 import Accordion from "@/components/layout/Accordion";
-import { getAllPosts } from "@/utils/posts";
-
-type Section = {
-  title: string;
-  content: {
-    title: string;
-    href: string;
-  }[];
-};
-
-function groupPostsByCategory(posts: Awaited<ReturnType<typeof getAllPosts>>) {
-  const grouped: Record<string, Section["content"]> = {};
-
-  posts.forEach((post) => {
-    if (!grouped[post.category]) {
-      grouped[post.category] = [];
-    }
-
-    grouped[post.category].push({
-      title: post.title,
-      href: `/${post.category}/${post.slug}`,
-    });
-  });
-
-  return Object.entries(grouped).map(([category, content]) => ({
-    title: category,
-    content,
-  }));
-}
+import { getAllPosts, groupPostsByCategory } from "@/utils/posts";
 
 export default function Page() {
   const posts = getAllPosts();
