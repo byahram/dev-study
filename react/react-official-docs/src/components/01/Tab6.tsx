@@ -36,7 +36,7 @@ export default function Tab6() {
     <article id="conditional-rendering">
       <h2 className="text-3xl font-semibold">06. 조건부 렌더링</h2>
       <div>
-        <h1>Sally Ride's Packing List</h1>
+        <h1>Sally Ride&apos;s Packing List</h1>
         <ul>
           <Item isPacked={true} name="Space suit" />
           <Item isPacked={true} name="Helmet with a golden leaf" />
