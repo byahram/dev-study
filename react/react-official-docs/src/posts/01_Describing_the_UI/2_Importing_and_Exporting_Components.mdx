@@ -13,18 +13,18 @@ title: "02. 컴포넌트 Import 및 Export하기"
 
 ```text
 // App.tsx
-import Gallery from "./Gallery.js";
-
-export default function App() {
+const App: React.FC = () => {
   return <Gallery />;
-}
+};
+
+export default App;
 
 // Gallery.tsx
-function Profile() {
+const Profile: React.FC = () => {
   return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
 }
 
-export default function Gallery() {
+const Gallery: React.FC = () => {
   return (
     <section>
       <h1>Amazing scientists</h1>
@@ -34,6 +34,8 @@ export default function Gallery() {
     </section>
   );
 }
+
+export default Gallery;
 ```
 
 ## ◾️ Default Export
@@ -81,3 +83,4 @@ import { Button, Avatar } from "./MyComponents";
 ## ◾️ 참고
 
 - 참고: [React 공식 문서](https://ko.react.dev/learn/importing-and-exporting-components)
+- 챌린지: [챌린지](https://ko.react.dev/learn/importing-and-exporting-components#challenges)
