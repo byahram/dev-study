@@ -1,4 +1,83 @@
 ---
-title: "컴포넌트 Import 및 Export하기"
-date: "2025-04-01"
+title: "02. 컴포넌트 Import 및 Export하기"
 ---
+
+# React에서 컴포넌트 가져오기 및 내보내기
+
+## ◾️ 컴포넌트를 import 하거나 export 하는 방법
+
+- 여러 파일로 구성된 컴포넌트를 만들고 관리할 수 있다.
+- 이를 위해 `import`와 `export` 키워드를 사용한다.
+- JavaScript에서는 `default export`와 `named export`라는 두 가지 방법이 있다.
+- 한 파일에는 하나의 `default export`만 존재할 수 있으며, `named export`는 여러 개 사용 가능하다.
+
+```text
+// App.tsx
+import Gallery from "./Gallery.js";
+
+export default function App() {
+  return <Gallery />;
+}
+
+// Gallery.tsx
+function Profile() {
+  return <img src="https://i.imgur.com/QIrZWGIs.jpg" alt="Alan L. Hart" />;
+}
+
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Amazing scientists</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
+  );
+}
+```
+
+## ◾️ Default Export
+
+- 한 파일에 하나의 컴포넌트만 export할 때 사용
+- 주로 주요 컴포넌트나 함수에 적합
+- `import` 시 이름을 자유롭게 지정 가능
+
+```text
+// MyButton.tsx
+export default function MyButton() {
+  return <button>I'm a button</button>;
+}
+
+// App.tsx
+import MyButton from "./MyButton";
+```
+
+## ◾️ Named Export
+
+- 여러 개의 함수나 컴포넌트를 export할 때 사용
+- `import`할 때는 `export`한 이름 그대로 사용해야 함
+
+```text
+// MyComponents.tsx
+export function Button() {
+  return <button>I'm a button</button>;
+}
+
+export function Avatar() {
+  return <img src="avatar.png" alt="Avatar" />;
+}
+
+// App.tsx
+import { Button, Avatar } from "./MyComponents";
+```
+
+## ◾️ 비교
+
+| Syntax  | Export                                | Import                                  |
+| ------- | ------------------------------------- | --------------------------------------- |
+| Default | `export default function Button() {}` | `import Button from './button.js';`     |
+| Named   | `export function Button() {}`         | `import { Button } from './button.js';` |
+
+## ◾️ 참고
+
+- 참고: [React 공식 문서](https://ko.react.dev/learn/importing-and-exporting-components)
