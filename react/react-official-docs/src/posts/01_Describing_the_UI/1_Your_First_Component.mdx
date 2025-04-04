@@ -29,22 +29,24 @@ export default function MyButton(): JSX.Element {
 ## ◾️ 컴포넌트 예시
 
 ```JSX
-function Profile() {
+const Profile: React.FC = () => {
   return <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />;
-}
+};
 
-export default function Gallery() {
+const Tab1: React.FC = () => {
   return (
-    <section>
-      <h1>Amazing scientists</h1>
+    <div className="flex mt-10">
       <Profile />
       <Profile />
       <Profile />
-    </section>
+    </div>
   );
-}
+};
+
+export default Tab1;
 ```
 
 ## ◾️ 참고
 
 - 참고: [React 공식 문서](https://ko.react.dev/learn/your-first-component)
+- 챌린지: [챌린지](https://ko.react.dev/learn/your-first-component#challenges)
