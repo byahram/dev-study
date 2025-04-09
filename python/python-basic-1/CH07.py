@@ -10,8 +10,6 @@ print("------------------------")
 print()
 
 # EX1.
-print("# EX1.")
-
 def hello() :
     print("안녕하세요")
     print("제 이름은 파이썬입니다.")
@@ -28,17 +26,16 @@ print("------------------------")
 print()
 
 # EX1.
-print("# EX1.")
-
 def greet() :
     message = "hello"       # 지역변수
     print(message)
 greet()
+
+print()
+print("------------------------")
 print()
 
 # EX2.
-print("# EX2.")
-
 def show_score() :
     score = 95
     print(score)
@@ -52,8 +49,6 @@ print("------------------------")
 print()
 
 # EX1.
-print("# EX1.")
-
 score = 0
 def add_score() :
     # 만약 global을 삭제한다면? : 함수 안에 있는 score를 지역변수로 생각하는데, 아직 값이 없어서 오류가 난다.
@@ -63,11 +58,12 @@ def add_score() :
 
 add_score()
 print("함수 밖 점수 : ", score)
+
+print()
+print("------------------------")
 print()
 
 # EX2. 게임 점수 시스템
-print("# EX2. 게임 점수 시스템")
-
 score = 100
 def play_game() :
     scoreNum = 0        # 지역 변수 
@@ -76,11 +72,12 @@ def play_game() :
     print("게임 시작 ", scoreNum)
 
 play_game()
+
+print()
+print("------------------------")
 print()
 
 # EX3. 게임 점수 시스템
-print("# EX3. 게임 점수 시스템")
-
 score = 100
 def playing() :
     global score
@@ -100,48 +97,50 @@ print("------------------------")
 print()
 
 # EX1. 매개변수
-print("# EX1.")
-
 def say_hello(name) :
     print("안녕, ", name)
 
 # 인자 : 함수를 호출할 때 전달하는 실제 값
 say_hello("민지야")         # 매개변수에는 name = "민지"
 say_hello("민주")           # 매개변수에는 name = "민주"
+
+print()
+print("------------------------")
 print()
 
 # EX2. 두 수 더하기
-print("# EX2. 두 수 더하기")
-
 def add(a, b) :
     print("두수의 합 = ", a + b)
 
 add(10, 15)
+
+print()
+print("------------------------")
 print()
 
 # EX3. 매개변수
-print("# EX3. 매개변수")
-
 def hello(name) :
     print("안녕하세요!")
     print("제 이름은 " + name + "입니다")
     print("만나서 반갑습니다.")
 
 hello("김송아")
+
+print()
+print("------------------------")
 print()
 
 # EX4.
-print("# EX4.")
-
 def multiply(num1, num2) :      # 매개변수(=parameter)
     print(num1 * num2)
 
 multiply(3, 4)      # 인자
+
+print()
+print("------------------------")
 print()
 
 # EX5.
-print("# EX5.")
-
 def introduce(name, age) :
     print("안녕하세요, 제 이름은 ", name, "입니다")
     print("제 나이는 ",  age, "입니다")
@@ -157,8 +156,6 @@ print("------------------------")
 print()
 
 # EX1.
-print("# EX1.")
-
 def add2(a, b) :
     print(a + b)
 add2(3, 5)
@@ -169,11 +166,12 @@ def add3(a, b) :
 
 result = add3(3, 5)
 print(result) 
+
+print()
+print("------------------------")
 print()
 
 # EX2.
-print("# EX2.")
-
 def multiply2(x, y) :
     return x * y
 
@@ -182,44 +180,45 @@ print(result)
 
 print()
 print()
-print("------------------------")
+print("---------------------------")
 print("--- 매개변수의 경우의 수")
-print("------------------------")
+print("---------------------------")
 print()
 
 # EX1.
-print("# EX1.")
-
 def get_number() :
     return 42
 
 num = get_number()
 print(num)
+
+print()
+print("------------------------")
 print()
 
 # EX2.
-print("# EX2.")
-
 def add5(a, b) :
     return a + b
 
 result = add5(3,5)
 print(result)
+
+print()
+print("------------------------")
 print()
 
 # EX3.
-print("# EX3.")
-
 def plus(a, b) :
     return a + b
 
 sum = plus(5, 10)
 print(sum)
+
+print()
+print("------------------------")
 print()
 
 # EX4.
-print("# EX4.")
-
 def plus_add(a, b) :
     sum = a + b
     if sum % 2 == 0 :
@@ -229,11 +228,12 @@ def plus_add(a, b) :
 
 print(plus_add(5, 10))
 print(plus_add(6, 10))   
+
+print()
+print("------------------------")
 print()
 
 # EX5. 세 수 중 가장 큰 수를 반환하기
-print("# EX5. 세 수 중 가장 큰 수를 반환하기")
-
 # max() 함수는 여러 값 중에서 가장 큰 값을 찾아서 돌려주는 함수이다.
 # min() 함수는 가장 작은 값을 돌려주는 함수이다.
 
@@ -249,19 +249,21 @@ def find_max(a, b, c) :
 
 print(find_max(3, 7, 5))
 print(find_max(10, 2, 8))
+
+print()
+print("------------------------")
 print()
 
 # EX6. 리스트에서 최댓값 찾기
-print("# EX6. 리스트에서 최댓값 찾기")
-
 scores = [82, 91, 77, 88]
 print(max(scores))
 print(max("a", "z", "c"))       # 아스키코드표에 의해서 결과가 나온다. a:97, z: 122
+
+print()
+print("------------------------")
 print()
 
 # EX7.
-print("# EX7.")
-
 def check_seven(num) :
     if num % 7 == 0 :
         return True
@@ -278,8 +280,6 @@ print("------------------------")
 print()
 
 # EX1.
-print("# EX1.")
-
 def factorial(num) :
     sum = 1     # 지역 변수
 
@@ -303,8 +303,6 @@ print("------------------------")
 print()
 
 # EX1. 리스트로 평균 반환하기
-print("# EX1. 리스트로 평균 반환하기")
-
 def cal_average(scores) :
     sum = 0
 
@@ -316,11 +314,12 @@ def cal_average(scores) :
 
 average1 = cal_average([55, 70, 100])
 print(average1)
+
+print()
+print("------------------------")
 print()
 
 # EX2. 리스트 숫자 두 배로 출력하기
-print("# EX2. 리스트 숫자 두 배로 출력하기")
-
 def double_numbers(numbers) :
     new_list = []
     for num in numbers :
@@ -329,11 +328,12 @@ def double_numbers(numbers) :
 
 list = double_numbers([3, 5, 7])
 print(list)
+
+print()
+print("------------------------")
 print()
 
 # EX3. 리스트에서 최댓값 반환하기
-print("# EX3. 리스트에서 최댓값 반환하기")
-
 def find_max(numbers) :
     max_value = numbers[0]
 
@@ -363,7 +363,7 @@ print(all)
 
 # 파일 쓰기
 file = open("./python/python-basic-1/ch07.txt", "w")
-file.write("ABCDEFC")
+file.write("ABABCABC")
 
 # 파일 닫기
 file = open("./python/python-basic-1/ch07.txt", "r")
@@ -383,3 +383,8 @@ print()
 - 다른 함수에 인자로 전달되는 함수이고, (나중에 필요할 때) 호출되는 함수를 말한다.
 - 쉽게 말하자면? 나 이 함수 나중에 불러줘 하는거고 다른 함수에게 맡겨두는 함수이다.
 """
+
+print()
+print()
+print("------------------------ 끝")
+print()
