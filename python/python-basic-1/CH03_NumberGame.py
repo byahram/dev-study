@@ -1,7 +1,9 @@
 """
-2025.03.20 목 - NumberGame
+2025.03.20 목
 """
-import random       # 랜덤 숫자 생성 모듈
+
+ # 랜덤 숫자 생성 모듈
+import random      
 
 # 1부터 100사이의 랜덤 숫자 생성
 secret_numbers = random.randint(1, 100)
@@ -16,7 +18,8 @@ print("1부터 100사이의 숫자를 맞춰보세요!")
 while guess != secret_numbers:
     # 사용자 입력 받기
     guess = int(input("숫자를 입력하세요 : "))
-    count += 1      # 시도 횟수 증가
+    # 시도 횟수 증가
+    count += 1      
 
     if guess < secret_numbers :
         print("값이 너무 작습니다. 더 큰 숫자를 입력하세요.")
