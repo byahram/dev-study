@@ -251,25 +251,30 @@ Customer            손님의 행동 관리            주문 수행, Order 객�
 5. 주문 내역 및 총액 출력
 """
 
+# 메뉴 정보를 관리하는 Menu 클래스
 class Menu :
     def __init__(self):
-        # 메뉴 항목을 딕셔너리로 저장(메뉴이름: 가격)
+        # 메뉴 항목을 딕셔너리로 저장 (메뉴이름: 가격)
         self.items = {
             "Burger" : 5000,
             "Fries" : 2000,
             "Soda" : 1000
         }
 
+    # 메뉴를 출력해주는 함수
     def show_menu(self) :
         print("==메뉴판==")
         for name, price in self.items.items():
+            # 각 메뉴 항목 출력
             print(f"{name}: {price}원")
+        # 안내 문구 출력
         print("메뉴 이름을 입력해 주세요. (입력 : '종료' 시 주문 완료) \n")
 
 # 주문 정보를 관리하는 Order 클래스
 class Order :
     def __init__(self):
-        self.cart = []      # 장바구니 역할을 할 리스트 생성
+        # 장바구니 역할을 할 리스트 생성
+        self.cart = []
     
     # 선택한 항목을 장바구니에 추가하는 함수
     def add_item(self, name, price) :
