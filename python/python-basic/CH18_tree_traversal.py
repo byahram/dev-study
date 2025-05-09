@@ -149,6 +149,78 @@ inorder(root)
 - 중위 순회 순서 : 왼쪽 -> 루트 -> 오른쪽
 '''
 
+print()
+print()
+print("-----------------------------")
+print("--- 트리 순회 3. 후위 순회")
+print("-----------------------------")
+print()
+
+'''
+2025.05.06 화
+
+[후위 순위]
+
+- 트리의 노드를 왼쪽 오른쪽 루트 순서로 방문한다.
+- 즉, 자식 노드를 모두 방문한 후, 가장 마지막에 부모 노드를 처리하는 방식이다.
+
+4-5-2-6-7-3-1
+D  B  E  G  F  C  A
+'''
+
+# 노드 클래스 정의
+class Node : 
+    def __init__(self, value) :
+        self.value = value
+        self.left = None        # 왼쪽 자식 노드
+        self.right = None       # 오른쪽 자식 노드
+
+# 트리 생성
+root = Node("A")
+root.left = Node("B")
+root.right = Node("C")
+root.left.left = Node("D")
+root.left.right = Node("E")
+
+# 후위 순회 함수
+def postorder(node) :
+    if node :
+        postorder(node.left)        # 왼쪽 자식 방문
+        postorder(node.right)       # 오른쪽 자식 방문
+        print(node.value, end = '  ')       # 현재 노드 출력
+
+# 후위 순회 실행
+print("후위 순회 실행")
+postorder(root)
+
+print('\n')
+print("------------------------")
+print()
+
+# 노드 클래스 정의
+class Node : 
+    def __init__(self, value) :
+        self.value = value
+        self.left = None
+        self.right = None
+
+root = Node("1")
+root.left = Node("2")
+root.right = Node("3")
+root.left.left = Node("4")
+root.left.right = Node("5")
+root.right.left = Node("6")
+root.right.right = Node("7")
+
+def postorder(node) :
+    if node :
+        postorder(node.left)
+        postorder(node.right)
+        print(node.value, end = '  ')
+
+print("후위 순회 실행")
+postorder(root)
+
 print('\n')
 print("------------------------ 끝")
 print()
