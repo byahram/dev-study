@@ -9,3 +9,7 @@ __pycache__/
 *.shm
 
 .ipynb_checkpoints
+
+task-info.yaml
+task-remote-info.yaml
+lesson-remote-info.yaml
