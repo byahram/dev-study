@@ -11,10 +11,17 @@ print()
 # 42. 리스트를 활용한 반복문 할당
 print("[42.]")
 dot = [1.5, 3.6, 4.53, 5.48, 6.87, 7.87, 8.89]
-dot10 = []
+dot100 = []
+
 for i in dot :
-    dot10.append(i * 100)
-print(dot10)
+    dot100.append(i * 100)
+print(dot100)
+
+a = 0
+while a < len(dot):
+    dot100[a] = dot[a] * 100
+    a += 1
+print(dot100)
 print()
 
 # 43. 리스트 요소의 평균 구하기
