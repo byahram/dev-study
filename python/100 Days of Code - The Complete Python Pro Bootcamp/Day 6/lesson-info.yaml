@@ -1,2 +1,5 @@
 content:
   - Functions
+reference:
+  - https://docs.python.org/3/library/functions.html
+  - https://peps.python.org/pep-0008/
