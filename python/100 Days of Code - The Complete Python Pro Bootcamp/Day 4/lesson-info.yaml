@@ -4,8 +4,3 @@ content:
   - Banker Roulette
   - IndexError
   - Rock Paper Scissors
-reference:
-  - https://en.wikipedia.org/wiki/Mersenne_Twister
-  - https://docs.python.org/3/library/random.html
-  - https://docs.python.org/3/tutorial/datastructures.html
-  - https://www.delish.com/food-news/a26872638/dirty-dozen-foods-list-2019/
